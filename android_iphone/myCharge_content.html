@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+<title>
+</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="css/ui-base.css">
+<link rel="stylesheet" href="css/ui-box.css">
+<link rel="stylesheet" href="css/project/style.css">
+<link rel="stylesheet" href="myCharge_content/css/main.css">
+<script src="js/zy_control.js"></script>
+<script src="js/zy_click.js"></script>
+<script src="js/zy_tmpl.js"></script>
+<script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh2" ontouchstart>
+<div id="mayList">
+</div>
+</body>
+<script>
+zy_init();
+window.uexOnload=function(type){
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0", "rgba(255,255,255,0)", "0");
+        uexWindow.showBounceView("1", "rgba(255,255,255,0)", "0");
+	}
+	mayList();
+}
+
+function mayList(){
+	var arrData=localStorage.getItem("feeItems");
+	arrData=JSON.parse(arrData);
+	var tmpl = 	'<div class="ubb b-gra ub uinn c-wh" ontouchstart="zy_touch(\'btn-act\')">'
+				+'	<div class="ub-f1 ub ub-ver">'
+				+'		<div class="umar-b t-gra1 ulev-app2">${date}</div>'
+				+'		<div class="ub">${cb:type}</div>'
+				+'	</div>'
+				+'<div class="umar-b t-gra1 ulev-app2">${fee} 元</div>'
+				+'</div>'
+	
+	var s = zy_tmpl(tmpl, arrData, zy_tmpl_count(arrData), tmpleCb);
+	$$('mayList').innerHTML=s;
+}
+
+function tmpleCb(a, b){
+	var str = "";
+	switch(b[1]){
+		case "type":
+			if(a.type == "0"){
+				str = '<div class="c-red-oa ulev-4 t-wh uinn3 uc-a-list1">交通</div>';
+				return str;
+			}else if(a.type == "1"){
+				str = '<div class="c-orange ulev-4 t-wh uinn3 uc-a-list1">工作餐</div>';
+				return str;
+			}else{
+				str = '<div class="c-green ulev-4 t-wh uinn3 uc-a-list1">日常生活</div>';
+				return str;
+			}
+	}
+}
+
+function openApply(e){
+	if(isPhone&&e.type=='click')return;
+	openNewWin('detail','detail.html');
+}
+</script>
+</html>

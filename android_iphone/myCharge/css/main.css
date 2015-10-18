@@ -1,0 +1,54 @@
+.t-btn-ay1{
+	background-image:url('myImg/t-btn-ay1.png');
+}
+
+
+.c-wh1{
+	background-color:#f1f1f1;
+}
+.c-wh{
+	background-color:#ffffff;
+}
+.c-orange{
+	background-color:#f78c3e;
+}
+.b-gra{
+	border-color:#a4a4a4;
+}
+.t-gra
+{
+	color:#a1a1a1;
+}
+.t-gra1{
+	color:#787878;
+}
+.t-green
+{
+	color:#6DC850;
+}
+.addfont{
+	font-weight:bold;
+}
+.uinnh1
+{
+	padding:0.5em 0.5em 0 0.5em;
+	margin:0;
+}
+.ulab .uinput
+{
+	margin-left:3px
+}
+.uinput input,.uinput textarea
+{
+	margin:0px;
+	border:0px;
+	width:100%;
+	height:100%;
+	-webkit-appearance: none;
+	padding: .4em 0;
+	line-height: 1.2em;
+	background:none;
+	text-decoration: none;
+	font-size: 1em;
+	display:block;
+}

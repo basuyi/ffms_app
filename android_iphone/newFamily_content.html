@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+	<link rel="stylesheet" href="css/ui-input.css">
+	<link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="newFamily_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+    <div id="content" class="ub-f1 tx-l ub ub-ver c-wh1">
+        <div class="ub ub-ver ub-f1">
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="家庭名称" id="familyName"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="家庭签名" id="familyDesc"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac ub-pc umar-a c-org uc-a1" ontouchstart="zy_touch('btn-act1')" onclick="addFamily();">
+                <div class=" ub ub-ac ub-pc t-wh uinnh5">创   建</div>
+			</div>
+        </div>
+	</div>
+    <div id="footer" class="">
+    </div>
+</div>
+</body>
+<script>
+zy_init();
+function addFamily(){
+	var familyName = $$("familyName").value;
+	var familyDesc = $$("familyDesc").value;
+	if(familyName == ""){
+		$toast('家庭名称不能为空','2000');
+		return;
+	}else if(familyDesc == ""){
+		$toast('家庭签名不能为空','2000');
+		return;
+	}else{
+		var session=localStorage.getItem("session");
+		session=JSON.parse(session);
+		session.familyId=1;//for test
+		session.role=1;
+		session.familyName=familyName;
+		session.familyDesc=familyDesc;
+		session=JSON.stringify(session);
+		localStorage.setItem("session", session);
+		uescript('newFamily','closeNewFamily()');
+		openNewWin("myFamily", "myFamily.html");
+	}
+	/*
+var name2 = encodeURIComponent(name);
+	var pwd2 = encodeURIComponent(pwd);
+	var url = "" + name2 + "&password=" + pwd2;
+	$toast('登录中');
+	$.getJSON(url,function(data){
+		$closeToast();
+		if(data.status == 1){
+			$toast('登录成功','2000');
+			openNewWin('index','../index/index.html');
+		}else{
+			$toast('登录失败','2000');
+		}
+		
+	},'',getJSONError,'GET','','');
+*/
+}
+
+</script>
+</html>

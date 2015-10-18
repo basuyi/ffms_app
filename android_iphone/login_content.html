@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+	<link rel="stylesheet" href="css/ui-input.css">
+	<link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="login_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+    <div id="content" class="ub-f1 tx-l ub ub-ver c-wh1">
+        <div class="uinn ub ub-ac ub-pc">
+            <div class="logo ub-img umhw1"></div>
+        </div>
+		<div class="uinn ub ub-ac ub-pc ub-ver">
+			<div class="ulev1 t-blu addfont uinn">掌柜宝</div>
+        </div>
+        <div class="ub ub-ver ub-f1">
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="手机" id="uid"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw respwd ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="密码" id="upwd"  value="" type="password" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+			<div class="ub umar-a ub-ac">
+				<input type="checkbox" name="che1" class="uhide" checked="checked" value="" id="autid">
+                <div onclick="zy_for(event)"  class="ub t-bla ub-f1" style="width:7.5em">
+                    <div class="che-icon ub-img umhw2"></div>
+					<div class="ub-f1 ut-s tx-l t-gra ub ub-ac ulev-1" style=" margin-left:.5em;">记住用户名</div>
+                </div>
+				<div class="ub t-blu umar-r ulev-1">忘记密码</div>
+			</div>
+            <div class="ub ub-ac ub-pc umar-a c-org uc-a1" ontouchstart="zy_touch('btn-act1')" onclick="login();">
+                <div class=" ub ub-ac ub-pc t-wh uinnh5">登　录</div>
+			</div>
+			<div class="umar-a ub t-blu">
+				<div class="ub-f1 ulev-1 uinn3" ontouchstart="zy_touch('btn-act1')" onclick="signup();">立即注册</div>
+				<div class="ulev-1 uinn3">无账号快捷登录</div>
+			</div>
+        </div>
+	</div>
+    <div id="footer" class="">
+    </div>
+</div>
+</body>
+<script>
+zy_init();
+function login(){
+	var name = $$("uid").value;
+	var pwd = $$("upwd").value;
+	if(name == ""){
+		$toast('账号不能为空','2000');
+		return;
+	}else if(pwd == ""){
+		$toast('密码不能为空','2000');
+		return;
+	}else{
+		var session={};
+		session.userName=$$("uid").value;
+		session.password=$$("upwd").value;
+		//session.familyId=1;
+		//session.role=1;
+		session=JSON.stringify(session);
+		localStorage.setItem("session", session);
+		uescript('login','closeLogin()');
+		var foward=localStorage.getItem("foward");
+		foward = JSON.parse(foward);
+		openNewWin(foward.name, foward.url);
+	}
+	/*
+var name2 = encodeURIComponent(name);
+	var pwd2 = encodeURIComponent(pwd);
+	var url = "" + name2 + "&password=" + pwd2;
+	$toast('登录中');
+	$.getJSON(url,function(data){
+		$closeToast();
+		if(data.status == 1){
+			$toast('登录成功','2000');
+			openNewWin('index','../index/index.html');
+		}else{
+			$toast('登录失败','2000');
+		}
+		
+	},'',getJSONError,'GET','','');
+*/
+}
+
+
+function signup(){
+	uescript('login', 'closeLogin()');
+	openNewWin("signup", "signup.html");
+}
+</script>
+</html>

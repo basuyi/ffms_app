@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="index_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="ub um-vp c-wh2 ub-ver uinn" ontouchstart>
+	<div class="ub ub-ver ub-fv">
+		<div class="uh-oa3 ub-fh ub-img1 oa1 ub" ontouchstart="zy_touch('btn-act1')" onclick="gotonew(event,'myCharge','myCharge.html')">
+			<div class="ub-fv uw-oa ub ub-ac ub-pc c-blu-218">
+				<div class="uw-oa2 ulev-oa t-wh">我要记账</div>
+			</div>
+		</div>
+		<div class="uh-oa3 ub-fh ub-img1 oa2 ub ub-pe" ontouchstart="zy_touch()" onclick="gotoMyFamily(event);">
+			<div class="ub-fv uw-oa ub ub-ac ub-pc c-red-d0">
+				<div class="uw-oa2 ulev-oa t-wh">我的家庭</div>
+			</div>
+		</div>
+		<div class="uh-oa3 ub-fh ub-img1 oa3 ub" ontouchstart="zy_touch()" onclick="gotonew(event,'news','news.html');">
+			<div class="ub-fv uw-oa ub ub-ac ub-pc c-org-c2">
+				<div class="uw-oa2 ulev-oa t-wh">产品介绍</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+window.uexOnload=function(type){
+	if(!type){
+	}
+}
+
+function gotonew(e,n,url){
+	if(isPhone&&e.type=='click')return;
+	openNewWin(n,url);
+}
+function gotoMyFamily(e) {
+	var session=localStorage.getItem("session");
+	if (session == null) {
+		var foward={};
+		foward.name="myFamily";
+		foward.url="myFamily.html";
+		foward = JSON.stringify(foward);
+		localStorage.setItem("foward", foward);
+		gotonew(e,"login","login.html");
+	} else {
+		gotonew(e,"myFamily","myFamily.html");
+	}
+}
+</script>
+</html>

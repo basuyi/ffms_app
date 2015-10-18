@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="css/project/ui-list.css">
+	<link rel="stylesheet" href="addOrJoinFamily_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/zy_tmpl.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="ub um-vp c-wh2 ub-ver" ontouchstart>
+	<div class="uinn ub ub-ac ub-pc ub-ver">
+			<div class="ulev1 t-blu addfont uinn">掌柜宝发现您还在孤零零的飘，可以选择</div>
+        </div>
+    <div class="" id="aList">
+    </div>
+
+</body>
+<script>
+zy_init();
+window.uexOnload=function(type){
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0", "rgba(255,255,255,0)", "0");
+        uexWindow.showBounceView("1", "rgba(255,255,255,0)", "0");
+	}
+	aList();
+}
+
+function aList(){
+	var arrData = [{	
+		"prompt":"创建一个新家庭，你就是户主啦，即刻开始享受掌柜宝丰富的理财服务",
+		"matter":"创建家庭",
+		"action":"newFamily(event);"
+	}, {
+		"prompt":"已获取家庭邀请码，即刻申请加入这个家庭，接受掌柜宝为你带来的理财服务",
+		"matter":"加入家庭",
+		"action":"joinFamily(event);"
+	}];
+	var tmpl = 	'<ul ontouchstart="zy_touch(\'btn-act\')" onclick="${action}" class="c-wh ubb b-gra2 ub t-bla ub-ac lis">'
+		        +'    <li class="ub-f1 ut-s">'
+		        +'      <div class="t-gra-59 ulev-app2">${matter}</div>'
+				+'		<div class="ub umar-t-ac">'
+				+'			<div class="ulev-4 t-gra-8d umar-r-ac">${prompt}</div>'
+				+'		</div>'
+		        +'    </li>'
+		        +'    <li class="arrow lis-sw ub-img mar-ar1"></li>'
+		        +'</ul>'
+	
+	var s = zy_tmpl(tmpl, arrData, zy_tmpl_count(arrData));
+	$$('aList').innerHTML=s;
+}
+
+function newFamily(e){
+	if(isPhone&&e.type=='click')return;
+	uescript('myFamily','closeMyFamily()');
+	openNewWin('newFamily','newFamily.html');
+}
+function joinFamily(e){
+	if(isPhone&&e.type=='click')return;
+	openNewWin('joinFamily','joinFamily.html');
+}
+</script>
+</html>

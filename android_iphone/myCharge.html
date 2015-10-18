@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="myCharge/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+        <!--header开始-->
+       <div id="header" class="uh c-blu c-m1 t-wh ub ub-ac">
+        	<div id="" class="uh c-blu t-wh ub">
+            	<div class="umw4 ub ub-ac ub-pc" ontouchstart="zy_touch()" onclick="winClose();">
+ 					<div class="t-btn-a1 ub-img uwh-tBtn"></div>
+            	</div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的记账</h1>
+            	<div class="umw4 ub ub-ac ub-pc">
+ 					<div class="t-btn-a1"></div>
+            	</div>
+            </div>
+        </div>
+        <!--header结束--><!--content开始-->
+        <div id="content" class="ub-f1 tx-l t-bla ">
+            
+        </div>
+        <!--content结束-->
+		<!--footer开始-->
+		<div id="footer" class="uf c-m2 c-wh ubt b-gra">
+        	<div class="uinn3 ub">
+				<div class="ub-f1 uba uc-a1 b-gra uinput umar-a">    
+				 	<input id="fee" placeholder="金额"  ontouchstart="zy_touch()" onclick="" type="text" class="uc-a1">
+				</div>
+				<div class="ub-f1 uba uc-a1 b-gra uinput umar-a">    
+				 	<input id="fee_type" placeholder="类型"  ontouchstart="zy_touch()" onclick="" type="text" class="uc-a1">
+				</div>
+				 <div class="umw4 ub ub-ac ub-pc c-orange" ontouchstart="zy_touch()" onclick="addFee();" >
+ 					<div class="t-btn-ay1 ub-img uwh-tBtn"></div>
+            	</div>
+			</div>
+        </div>
+        <!--footer结束-->
+    </div>
+</body>
+<script>
+zy_init();
+var arrData=localStorage.getItem("feeItems");
+if (arrData == null) {
+ arrData = [{	
+		"type":"1",
+		"date":"2015-10-13 13:15",
+		"fee":"15"
+	}, {
+		"type":"2",
+		"date":"2015-10-13 14:15",
+		"fee":"22"
+	}, {
+		"type":"0",
+		"date":"2015-10-13 14:15",
+		"fee":"14"
+	}];
+	var strFeeItems=JSON.stringify(arrData);
+	localStorage.setItem("feeItems", strFeeItems);
+}
+
+window.uexOnload = function(type){
+    if (!type) {
+        zy_con("content", "myCharge_content.html", 0, $$("header").offsetHeight);
+    }
+	window.onorientationchange=window.onresize=function(){
+		zy_resize("content",0,$$("header").offsetHeight);				
+	}
+}
+
+function addFee(){
+	var fee = $$("fee").value;
+	var fee_type = $$("fee_type").value;
+	var newItem = {
+		"type":fee_type,
+		"date":"2015-10-13 14:15",
+		"fee":fee
+	};
+	var feeItems = localStorage.getItem("feeItems");
+	feeItems=JSON.parse(feeItems);
+	feeItems.push(newItem);
+	var strFeeItems=JSON.stringify(feeItems);
+	localStorage.setItem("feeItems", strFeeItems);
+	uexWindow.evaluatePopoverScript("", "content", "mayList();");
+}
+</script>
+</html>

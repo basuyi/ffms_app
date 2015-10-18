@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="css/project/ui-list.css">
+	<link rel="stylesheet" href="news_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/zy_tmpl.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="ub um-vp c-wh2 ub-ver" ontouchstart>
+    <div class="" id="newsList">
+        <!--ul ontouchstart="zy_touch('btn-act')" class="c-wh ubb b-gra2 ub t-bla ub-ac uinn-oanews">
+            <li class="ub-f1 ut-s umar-r">
+                <div class="t-gra-59 ulev-app2">AppCan新版本即将面试，启动移动互...</div>
+				<div class="ub umar-t-ac">
+					<div class="ulev-4 t-gra-b"> AppCan新版本即将面试，启动移动互联网跨平台开发新时代。AppCan新版本即将面试，启...</div>
+				</div>
+            </li>
+            <li class="arrow lis-sw ub-img"></li>
+        </ul>
+		<ul ontouchstart="zy_touch('btn-act')" class="c-wh ubb b-gra2 ub t-bla ub-ac uinn-oanews">
+			<li class="ub-img uwh-oan1 mar-ar1" style="background-image:url('css/myImg/oaNimg.png');"></li>
+            <li class="ub-f1 ut-s umar-r">
+                <div class="t-gra-59 ulev-app2">AppCan新版本即将面试，启动移动互...</div>
+				<div class="ub umar-t-ac">
+					<div class="ulev-4 t-gra-b"> AppCan新版本即将面试，启动移动互联网跨平台开发新时代。AppCan新版本即将面试，启...</div>
+				</div>
+            </li>
+            <li class="arrow lis-sw ub-img"></li>
+        </ul-->
+    </div>
+
+</body>
+<script>
+zy_init();
+window.uexOnload=function(type){
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0", "rgba(255,255,255,0)", "0");
+        uexWindow.showBounceView("1", "rgba(255,255,255,0)", "0");
+	}
+	newsList();
+}
+
+function newsList(){
+	var arrData = [{
+		"newsImg":"",
+		"title":"AppCan新版本即将面市，启动移动互联网",
+		"content":"AppCan新版本即将面市，启动移动互联网跨平台开发新时代。AppCan新版本即将面市，",
+	}, {
+		"newsImg":"\'news_content/css/myImg/oaNimg.png\'",
+		"title":"马航失联",
+		"content":"AppCan新版本即将面市，启动移动互联网跨平台开发新时代。AppCan新版本即将面市，",
+	}];
+	var tmpl = '<ul ontouchstart="zy_touch(\'btn-act\')" onclick="openDetails(event,\'${title}\')" class="c-wh ubb b-gra2 ub t-bla ub-ac uinn-oanews">'
+				+'	${cb:newsImg}'
+		        +'    <li class="ub-f1 ut-s umar-r">'
+		        +'        <div class="t-gra-59 ulev-app2">${title}</div>'
+				+'		<div class="ub umar-t-ac">'
+				+'			<div class="ulev-4 t-gra-b">${content}</div>'
+				+'		</div>'
+		        +'    </li>'
+		        +'    <li class="arrow lis-sw ub-img"></li>'
+		        +'</ul>'
+	
+	
+	
+	var s = zy_tmpl(tmpl, arrData, zy_tmpl_count(arrData),tmpleCb);
+	$$('newsList').innerHTML=s;
+}
+function tmpleCb(a,b){
+	var str = "";
+	switch(b[1]){
+		case "newsImg":
+		newsImg = a.newsImg;
+		if(newsImg == ""){
+			str = '	<li class=" uhide" style="background-image:url(${newsImg});"></li>'
+		}else{
+			str = '	<li class="ub-img uwh-oan1 mar-ar1" style="background-image:url(' +a.newsImg +');"></li>'
+		}
+		return str;
+	}
+}
+
+function openDetails(e,title){
+	if(isPhone&&e.type=='click')return;
+	setLocVal('newsTit',title);
+	uescript('news','opendetail()');
+}
+
+</script>
+</html>

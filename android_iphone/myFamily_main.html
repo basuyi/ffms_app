@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="css/project/ui-list.css">
+	<link rel="stylesheet" href="myFamily_main/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/zy_tmpl.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="ub um-vp c-wh2 ub-ver" ontouchstart>
+    <div class="" id="aList">
+    </div>
+
+</body>
+<script>
+zy_init();
+window.uexOnload=function(type){
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0", "rgba(255,255,255,0)", "0");
+        uexWindow.showBounceView("1", "rgba(255,255,255,0)", "0");
+	}
+	aList();
+}
+
+function aList(){
+	var arrData = [{	
+		"sponsor":"落叶",
+		"matter":"差旅费报销申请",
+		"department":"人事部门"	//审批人
+	}, {
+		"sponsor":"寒雪",
+		"matter":"加班调休",
+		"department":"技术部"
+	}, {
+		"sponsor":"秋霜",
+		"matter":"年假申请",
+		"department":"设计部"
+	}];
+	var tmpl = 	'<ul ontouchstart="zy_touch(\'btn-act\')" onclick="openDetails(event)" class="c-wh ubb b-gra2 ub t-bla ub-ac lis">'
+		        +'    <li class="ub-f1 ut-s">'
+		        +'      <div class="t-gra-59 ulev-app2">${matter}</div>'
+				+'		<div class="ub umar-t-ac">'
+				+'			<div class="ulev-4 t-gra-8d umar-r-ac">发起人：${sponsor}</div>'
+				+'			<div class="ulev-4 t-gra-8d">部门：${department}</div>'
+				+'		</div>'
+		        +'    </li>'
+		        +'    <li class="arrow lis-sw ub-img mar-ar1"></li>'
+		        +'</ul>'
+	
+	var s = zy_tmpl(tmpl, arrData, zy_tmpl_count(arrData));
+	$$('aList').innerHTML=s;
+}
+
+function openDetails(e){
+	if(isPhone&&e.type=='click')return;
+	openNewWin('detail','detail.html');
+}
+</script>
+</html>

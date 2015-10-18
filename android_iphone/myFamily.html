@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-box.css">
+	<link rel="stylesheet" href="css/ui-base.css">
+	<link rel="stylesheet" href="css/project/ui-tab.css">
+	<link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="css/ui-input.css">
+	<link rel="stylesheet" href="myFamily/css/main.css">
+	<script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+	<script src="js/zy_tmpl.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+        <!--header开始-->
+        <div id="header" class="uh t-wh ub c-blu">
+        	<div class="umw4 ub ub-ac ub-pc" ontouchstart="zy_touch()" onclick="winClose();">
+        		<div class="t-btn-a1 ub-img uwh-tBtn"></div>
+			</div>
+            <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的家庭</h1>
+			<div class="umw4 ub ub-ac ub-pc" ontouchstart="zy_touch()" onclick="openPop();">
+					<div class="t-btn-oas ub-img"></div>
+        	</div>
+        </div>
+        <!--header结束-->
+		<!--content开始-->
+        <div id="content" class="ub-f1 tx-l t-bla c-gra1">
+            
+        </div>
+        <!--content结束-->
+		<!--footer开始-->
+	    <div id="footer" class="uf t-bla ub ubt b-gra4">
+	    	
+		</div>
+        <!--footert结束-->
+    </div>
+</body>
+<script>
+zy_init();	
+window.uexOnload = function(type){	
+    if (!type) {
+		var session=localStorage.getItem("session");
+		if (session == null) {
+			var foward={};
+			foward.name="myFamily";
+			foward.url="myFamily.html";
+			foward = JSON.stringify(foward);
+			localStorage.setItem("foward", foward);
+			openNewWin("login","login.html");
+		} else {
+			session=JSON.parse(session);
+			var userName=session.userName;
+			var password=session.password;
+			var familyId=session.familyId;
+			var role=session.role;
+			if (familyId == null) {
+       			zy_con("content", "addOrJoinFamily_content.html", 0, $$("header").offsetHeight);
+			} else {
+				$$('footer').innerHTML='<div id="footerNav" class="ub ub-f1 tab"></div>';
+				showFooterMenu();
+				$$("nav_main").checked=true;
+       			openCon("main");
+			}
+		}
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("content",0,$$("header").offsetHeight);				
+	}
+}
+
+function closeMyFamily(){
+	winClose();
+}
+
+function openCon(id){
+	zy_con("content", "myFamily_" + id + ".html", 0, $$("header").offsetHeight);
+}
+
+function showFooterMenu(){
+	var arrData = [{	
+		"id":"main",
+		"name":"首页",
+		"class":"tp-home2"
+	}, {
+		"id":"activity",
+		"name":"活动",
+		"class":"tp-contact"
+	}, {
+		"id":"cycle",
+		"name":"亲友圈",
+		"class":"tp-friend"
+	}, {
+		"id":"me",
+		"name":"我",
+		"class":"tp-my2"
+	}];
+	var tmpl ='<div class="pos_re ub ub-f1">'
+	            +'     <input class="uhide" type="radio" name="tabSwitch" id="nav_${id}">'
+	            +'     <div onmousedown="zy_touch(\'\',zy_for);" ontouchstart="zy_touch(\'\',zy_for)" onclick="openCon(${id});" class="ub-f1 ub ub-ver">'
+	            +'         <div class="ub-f1 ub-img5 ${class}"></div>'
+	            +'         <div class="uinn-a13 ulev-1 tx-c act-col-blu">${name}</div>'
+	            +'     </div>'
+				+' </div>'
+	
+	var s = zy_tmpl(tmpl, arrData, zy_tmpl_count(arrData));
+	$$('footerNav').innerHTML=s;
+}
+</script>
+</html>

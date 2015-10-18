@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+	<link rel="stylesheet" href="css/ui-input.css">
+	<link rel="stylesheet" href="css/project/style.css">
+	<link rel="stylesheet" href="signup_content/css/main.css">
+    <script src="js/zy_control.js"></script>
+    <script src="js/zy_click.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+    <div id="content" class="ub-f1 tx-l ub ub-ver c-wh1">
+        <div class="ub ub-ver ub-f1">
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="手机" id="uid"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw respwd ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="密码" id="upwd"  value="" type="password" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="昵称" id="unick"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="微博" id="uwb"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra umar-a uc-a1 c-wh">
+                <div class="ub ub-ac">
+                	<div class="umhw resuser ub-img umar-l"></div>
+                    <div class="ub-f1 uinput uinn">
+                        <input placeholder="微信号" id="uwx"  value="" type="text" class="uc-a1">
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac ub-pc umar-a c-org uc-a1" ontouchstart="zy_touch('btn-act1')" onclick="signup();">
+                <div class=" ub ub-ac ub-pc t-wh uinnh5">注　册</div>
+			</div>
+        </div>
+	</div>
+    <div id="footer" class="">
+    </div>
+</div>
+</body>
+<script>
+zy_init();
+function signup(){
+	var name = $$("uid").value;
+	var pwd = $$("upwd").value;
+	var nickname = $$("unick").value;
+	var weibo = $$("uwb").value;
+	var weixin = $$("uwx").value;
+	if(name == ""){
+		$toast('账号不能为空','2000');
+		return;
+	}else if(pwd == ""){
+		$toast('密码不能为空','2000');
+		return;
+	}else if(nickname == ""){
+		$toast('昵称不能为空','2000');
+		return;
+	}else if(weibo == ""){
+		$toast('微博不能为空','2000');
+		return;
+	}else if(weixin == ""){
+		$toast('微信号不能为空','2000');
+		return;
+	}else{
+		var session={};
+		session.userName=name;
+		session.password=pwd;
+		session=JSON.stringify(session);
+		localStorage.setItem("session", session);
+		uescript('signup','closeSignup()');
+		var foward=localStorage.getItem("foward");
+		foward = JSON.parse(foward);
+		openNewWin(foward.name, foward.url);
+	}
+	/*
+var name2 = encodeURIComponent(name);
+	var pwd2 = encodeURIComponent(pwd);
+	var url = "" + name2 + "&password=" + pwd2;
+	$toast('登录中');
+	$.getJSON(url,function(data){
+		$closeToast();
+		if(data.status == 1){
+			$toast('登录成功','2000');
+			openNewWin('index','../index/index.html');
+		}else{
+			$toast('登录失败','2000');
+		}
+		
+	},'',getJSONError,'GET','','');
+*/
+}
+
+</script>
+</html>
